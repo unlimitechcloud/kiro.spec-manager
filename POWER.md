@@ -1,7 +1,7 @@
 ---
 name: "spec-manager"
 displayName: "Spec Manager"
-description: "Standardize spec creation with intelligent identifier auto-increment, URL pattern detection, GitHub Issues and Jira integration, and git-based assignee tracking for consistent project management across teams"
+description: "Standardize spec creation with intelligent auto-increment, URL detection, GitHub/Jira integration, and git-based tracking"
 keywords: 
   - "specs"
   - "project-management"
