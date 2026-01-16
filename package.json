@@ -1,0 +1,12 @@
+{
+  "name": "kiro-spec-manager-power",
+  "version": "1.0.0",
+  "description": "Spec Manager Power for Kiro - build and distribution",
+  "scripts": {
+    "build": "node build.cjs",
+    "clean": "rm -rf dist"
+  },
+  "keywords": ["kiro", "power", "specs", "documentation"],
+  "author": "Unlimitech Cloud LLC",
+  "license": "MIT"
+}

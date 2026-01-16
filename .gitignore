@@ -1,0 +1,12 @@
+# Build output
+dist/
+
+# Node modules (if any)
+node_modules/
+
+# Development files
+.DS_Store
+*.log
+
+# Spec working directories
+.kiro/specs/**/.work/
