@@ -2,6 +2,10 @@
 
 This guide provides a detailed workflow for creating specs with Spec Manager.
 
+## Prerequisites
+
+Before creating your first spec, ensure configuration exists. If `.kiro/spec-manager.json` is missing, Kiro will automatically run the interactive setup wizard. See `initial-configuration-setup.md` for details.
+
 ## Complete Workflow
 
 ### Step 1: Prompt for Spec Identifier (Optional)

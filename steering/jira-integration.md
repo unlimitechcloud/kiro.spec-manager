@@ -4,7 +4,9 @@ This steering file provides detailed guidance for working with Jira in the Spec 
 
 ## Overview
 
-When a user wants to create a spec linked to a Jira issue, follow this workflow to detect the Jira URL, use the Jira key directly as the identifier, and configure automatic URL reconstruction for future specs.
+When a user wants to create a spec linked to a Jira issue, the Spec Manager uses configuration from `.kiro/spec-manager.json` to automatically reconstruct URLs and use Jira keys as identifiers.
+
+**First-time setup**: If no configuration exists, Kiro will run the interactive setup wizard. See `initial-configuration-setup.md` for details.
 
 ## Jira URL Patterns
 

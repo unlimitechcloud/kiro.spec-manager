@@ -4,7 +4,11 @@ This steering file provides detailed guidance for managing the `spec-manager.jso
 
 ## Overview
 
-The `spec-manager.json` file stores tracking system preferences and enables automatic URL reconstruction. This guide covers when and how to create, update, validate, and troubleshoot the configuration file.
+The `spec-manager.json` file stores tracking system preferences and enables automatic URL reconstruction. 
+
+**Initial creation**: On first use, Kiro automatically runs an interactive setup wizard to create this file. See `initial-configuration-setup.md` for the setup process.
+
+This guide covers how to update, validate, and troubleshoot the configuration file after initial setup.
 
 ## File Location
 

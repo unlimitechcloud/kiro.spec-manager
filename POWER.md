@@ -15,6 +15,7 @@ A Knowledge Base Power that standardizes spec creation in Kiro with intelligent 
 The Spec Manager Power provides comprehensive workflows and documentation for creating specs with:
 
 - **Intelligent Identifier Auto-increment**: Automatically suggests the next identifier based on your project's pattern (with or without zero-padding)
+- **Initial Configuration Setup**: Interactive wizard to establish tracking system preferences on first use
 - **Prefix-Aware Input**: Type just numbers (e.g., `7`) instead of full identifiers (e.g., `GITHUB-7`) for faster spec creation
 - **URL Pattern Detection**: Reconstructs external system URLs from previous specs
 - **GitHub Issues Integration**: Synthetic identifiers (GITHUB-{number}) with automatic URL reconstruction
@@ -44,6 +45,39 @@ This power helps teams maintain consistency across hundreds of specs while minim
 
 
 ## Quick Start
+
+### First-Time Setup
+
+**Before creating your first spec**, Kiro will check for configuration. If `.kiro/spec-manager.json` doesn't exist, you'll be guided through a quick setup:
+
+```
+Kiro: "No configuration found. Let's set up your tracking system."
+
+Kiro: "Which tracking system do you use?"
+1. GitHub
+2. Jira
+3. None (manual tracking)
+
+You: "1"
+
+Kiro: "GitHub repository URL (e.g., https://github.com/owner/repo):"
+You: "https://github.com/myorg/myproject"
+
+Kiro: "Enable prefix-aware input? (Type '7' instead of 'GITHUB-7') [Y/n]:"
+You: "y"
+
+Kiro: "Project prefix [GITHUB-]:"
+You: [Enter]
+
+Kiro: "✅ Configuration saved to .kiro/spec-manager.json"
+```
+
+**What this enables:**
+- Auto-increment identifiers based on your tracking system
+- URL reconstruction for new specs
+- Prefix-aware input for faster spec creation
+
+See `steering/initial-configuration-setup.md` for detailed setup documentation.
 
 ### Creating Your First Spec
 
@@ -791,6 +825,7 @@ Kiro: "✅ Created: .kiro/specs/2026-01/FEATURE-10+implementing-comprehensive-us
 
 For more detailed guidance, see:
 
+- **initial-configuration-setup.md**: Interactive setup wizard for first-time configuration
 - **creating-specs.md**: Step-by-step workflow with validation rules
 - **naming-conventions.md**: Deep dive into identifier and name formats
 - **troubleshooting.md**: Extended troubleshooting guide
