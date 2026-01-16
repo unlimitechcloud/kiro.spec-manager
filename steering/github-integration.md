@@ -53,6 +53,102 @@ GitHub's numeric-only system needs a prefix because:
 3. **Searchability**: Easy to find all GITHUB-linked specs
 4. **Uniqueness**: Prevents conflicts with other numeric identifiers
 
+## Prefix-Aware Input Mode
+
+### Overview
+
+When working with GitHub, **prefix-aware input mode** is automatically enabled. This allows you to type just the issue number instead of the full identifier.
+
+**Without prefix mode**:
+```
+Kiro: "Identifier?"
+You: "GITHUB-7"
+```
+
+**With prefix mode** (automatic for GitHub):
+```
+Kiro: "Identifier (GITHUB-):"
+You: "7"
+Result: GITHUB-7
+```
+
+### How It Works
+
+When GitHub is detected for the first time:
+
+1. **Auto-enable prefix mode**:
+   ```json
+   {
+     "trackingSystem": "github",
+     "githubRepository": "https://github.com/owner/repo",
+     "usePrefix": true,
+     "projectPrefix": "GITHUB-",
+     "lastUpdated": "2026-01-16T10:30:00Z"
+   }
+   ```
+
+2. **Inform the user**:
+   ```
+   "✓ GitHub detected"
+   "✓ Prefix mode enabled with 'GITHUB-'"
+   "✓ You can now type just numbers for identifiers"
+   "  Example: Type '7' instead of 'GITHUB-7'"
+   ```
+
+3. **Accept both input styles**:
+   - Numeric: `7` → `GITHUB-7`
+   - Full: `GITHUB-7` → `GITHUB-7`
+
+### Benefits
+
+- **Faster**: Type 1-3 digits instead of 8-10 characters
+- **Fewer errors**: No typos in the prefix
+- **Flexible**: Can still use full identifiers when needed
+
+### Prompts with Prefix Mode
+
+**Auto-increment suggestion**:
+```
+Kiro: "Identifier (GITHUB-): [Press Enter for GITHUB-6, or type '7' for GITHUB-7]"
+```
+
+**User types number**:
+```
+You: "7"
+Kiro: "Use identifier 'GITHUB-7'? (y/n)"
+```
+
+**User types full identifier**:
+```
+You: "GITHUB-7"
+Kiro: "Use identifier 'GITHUB-7'? (y/n)"
+```
+
+### URL Reconstruction with Numeric Input
+
+When you provide numeric input, URL reconstruction uses that number:
+
+```
+You: "7"
+Result identifier: GITHUB-7
+Reconstructed URL: https://github.com/owner/repo/issues/7
+```
+
+**Workflow**:
+```
+Kiro: "Identifier (GITHUB-): [Press Enter for GITHUB-6]"
+You: "7"
+
+Kiro: "Use identifier 'GITHUB-7'? (y/n)"
+You: "y"
+
+Kiro: "External URL? (Press Enter to auto-detect)"
+You: [Enter]
+
+Kiro: "Detected: https://github.com/owner/repo/issues/7. Correct?"
+You: "yes"
+```
+
 ## Step-by-Step Workflow
 
 ### First Spec with GitHub URL
@@ -88,8 +184,17 @@ When a user provides a GitHub URL for the first time:
    {
      "trackingSystem": "github",
      "githubRepository": "https://github.com/owner/repo",
+     "usePrefix": true,
+     "projectPrefix": "GITHUB-",
      "lastUpdated": "2026-01-16T10:30:00Z"
    }
+   ```
+
+6. **Inform about prefix mode**:
+   ```
+   "✓ Prefix mode enabled with 'GITHUB-'"
+   "✓ You can now type just numbers for identifiers"
+   "  Example: Type '7' instead of 'GITHUB-7'"
    ```
 
 6. **Create metadata**:
@@ -100,6 +205,34 @@ When a user provides a GitHub URL for the first time:
      "url": "https://github.com/owner/repo/issues/5",
      ...
    }
+   ```
+
+### Subsequent Specs with Prefix Mode
+
+When a user wants to create another GitHub spec with prefix mode enabled:
+
+1. **Prompt with prefix indicator**:
+   ```
+   "Identifier (GITHUB-): [Press Enter for GITHUB-6, or type '7' for GITHUB-7]"
+   ```
+
+2. **Accept numeric input**:
+   ```
+   User input: "7"
+   Parse as: numeric
+   Combine with prefix: "GITHUB-7"
+   ```
+
+3. **Confirm with user**:
+   ```
+   "Use identifier 'GITHUB-7'? (y/n)"
+   ```
+
+4. **Reconstruct URL using numeric portion**:
+   ```
+   Config: "https://github.com/owner/repo"
+   Number: 7
+   Result: "https://github.com/owner/repo/issues/7"
    ```
 
 ### Subsequent Specs (Auto-increment)
@@ -336,13 +469,15 @@ If user has specs from multiple GitHub repositories:
 
 ## Examples
 
-### Example 1: First GitHub Spec
+### Example 1: First GitHub Spec (with Prefix Mode)
 
 ```
 User: "Create a spec for https://github.com/acme/app/issues/1"
 
 Kiro: "Detected GitHub issue #1"
 Kiro: "GitHub uses synthetic identifiers: GITHUB-{number}"
+Kiro: "✓ Prefix mode enabled with 'GITHUB-'"
+Kiro: "✓ You can now type just numbers for identifiers"
 Kiro: "Suggested identifier: GITHUB-1. Confirm?"
 User: "yes"
 
@@ -354,16 +489,16 @@ Kiro: "✅ Created: .kiro/specs/2026-01/GITHUB-1+user-login/"
 Kiro: "Config saved: https://github.com/acme/app"
 ```
 
-### Example 2: Auto-increment
+### Example 2: Auto-increment with Numeric Input
 
 ```
 User: "Create spec for password reset"
 
-Kiro: "Identifier? (Press Enter to auto-increment)"
+Kiro: "Identifier (GITHUB-): [Press Enter for GITHUB-2, or type '3' for GITHUB-3]"
 User: [Enter]
 
-Kiro: "Last GitHub spec: GITHUB-1. Suggested: GITHUB-2. Confirm?"
-User: "yes"
+Kiro: "Use identifier 'GITHUB-2'? (y/n)"
+User: "y"
 
 Kiro: "Spec name: password-reset. Confirm?"
 User: "yes"
@@ -377,14 +512,65 @@ User: "yes"
 Kiro: "✅ Created: .kiro/specs/2026-01/GITHUB-2+password-reset/"
 ```
 
-### Example 3: Custom Identifier
+### Example 3: Correcting Issue Number with Numeric Input
+
+```
+User: "Create spec for issue #5"
+
+Kiro: "Identifier (GITHUB-): [Press Enter for GITHUB-3]"
+User: "5"
+
+Kiro: "Use identifier 'GITHUB-5'? (y/n)"
+User: "y"
+
+Kiro: "Spec name:"
+User: "email-notifications"
+
+Kiro: "External URL? (Press Enter to auto-detect)"
+User: [Enter]
+
+Kiro: "Reconstructed: https://github.com/acme/app/issues/5. Correct?"
+User: "yes"
+
+Kiro: "✅ Created: .kiro/specs/2026-01/GITHUB-5+email-notifications/"
+```
+
+### Example 4: Using Full Identifier
 
 ```
 User: "Create spec for https://github.com/acme/app/issues/10"
 
 Kiro: "Detected GitHub issue #10"
-Kiro: "Suggested identifier: GITHUB-10. Confirm?"
-User: "no, use FEATURE-10"
+Kiro: "Identifier (GITHUB-): [Press Enter for GITHUB-10]"
+User: "GITHUB-10"
+
+Kiro: "Use identifier 'GITHUB-10'? (y/n)"
+User: "y"
+
+Kiro: "Spec name:"
+User: "new-feature"
+
+Kiro: "✅ Created: .kiro/specs/2026-01/GITHUB-10+new-feature/"
+```
+
+### Example 5: Custom Identifier (Overriding Prefix)
+
+```
+User: "Create spec for https://github.com/acme/app/issues/10"
+
+Kiro: "Detected GitHub issue #10"
+Kiro: "Identifier (GITHUB-): [Press Enter for GITHUB-10]"
+User: "FEATURE-10"
+
+Kiro: "⚠️  Warning: Identifier doesn't match expected prefix"
+Kiro: "  Expected: GITHUB-10"
+Kiro: "  Provided: FEATURE-10"
+Kiro: ""
+Kiro: "What would you like to do?"
+Kiro: "  1. Use 'FEATURE-10' as-is"
+Kiro: "  2. Correct to 'GITHUB-10'"
+Kiro: "  3. Re-enter identifier"
+User: "1"
 
 Kiro: "Using custom identifier: FEATURE-10"
 Kiro: "Note: This won't follow GitHub auto-increment pattern"
@@ -398,8 +584,16 @@ Kiro: "✅ Created: .kiro/specs/2026-01/FEATURE-10+new-feature/"
 
 - **Detect**: GitHub URLs with `/issues/{number}` pattern
 - **Generate**: Synthetic identifiers `GITHUB-{number}`
-- **Configure**: Save repository URL to `.kiro/spec-manager.json`
+- **Prefix Mode**: Automatically enabled for faster input
+- **Numeric Input**: Type just `7` instead of `GITHUB-7`
+- **Configure**: Save repository URL and prefix to `.kiro/spec-manager.json`
 - **Reconstruct**: Auto-generate URLs for subsequent specs
 - **Search**: Support both full identifier and number-only queries
-- **Explain**: Tell users about synthetic identifiers on first use
+- **Explain**: Tell users about synthetic identifiers and prefix mode on first use
 - **Allow**: Users can override any suggestion
+
+## See Also
+
+- **steering/prefix-aware-input.md**: Detailed guide on prefix-aware input mode
+- **spec-manager-schema.md**: Configuration file reference
+- **steering/config-management.md**: Advanced configuration management

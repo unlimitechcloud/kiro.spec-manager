@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Example spec-manager.json configuration for Jira with prefix-aware input mode enabled",
+  
+  "trackingSystem": "jira",
+  "jiraBaseUrl": "https://company.atlassian.net",
+  "jiraProject": "PROJECT",
+  "usePrefix": true,
+  "projectPrefix": "PROJECT-",
+  "lastUpdated": "2026-01-16T10:30:00Z",
+  
+  "_comments": {
+    "trackingSystem": "Set to 'jira' when using Jira",
+    "jiraBaseUrl": "Jira instance base URL without /browse/{key}",
+    "jiraProject": "Jira project key (uppercase letters and numbers only)",
+    "usePrefix": "Enables prefix-aware input mode - type just '123' instead of 'PROJECT-123'",
+    "projectPrefix": "The prefix to prepend to numeric identifiers - extracted from Jira project key",
+    "lastUpdated": "ISO 8601 timestamp - automatically updated by Kiro"
+  },
+  
+  "_usage": {
+    "description": "With this configuration, you can:",
+    "benefits": [
+      "Type just the issue number (e.g., '123') instead of the full key ('PROJECT-123')",
+      "Auto-increment will suggest the next issue number for this project",
+      "URLs will be automatically reconstructed as https://company.atlassian.net/browse/PROJECT-{number}",
+      "Both numeric input and full keys are accepted"
+    ],
+    "example_workflow": [
+      "Kiro: 'Identifier (PROJECT-): [Press Enter for PROJECT-101, or type '102' for PROJECT-102]'",
+      "You: '102'",
+      "Kiro: 'Use identifier PROJECT-102? (y/n)'",
+      "You: 'y'",
+      "Result: Spec created with identifier PROJECT-102"
+    ]
+  }
+}
