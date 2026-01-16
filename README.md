@@ -2,6 +2,32 @@
 
 Standardize spec creation in Kiro with intelligent automation and consistent organization.
 
+## Installation
+
+### From GitHub (Distribution Branch)
+
+In Kiro, install the power using this URL:
+
+```
+https://github.com/unlimitechcloud/kiro.spec-manager/tree/dist-branch
+```
+
+This branch contains only the distribution files required by Kiro powers.
+
+### From Local Build
+
+1. Clone the repository
+2. Build the power: `npm run build`
+3. In Kiro, install from local directory: `/path/to/repo/dist`
+
+## Development
+
+This repository contains both source files and build tools.
+
+- **Source files**: Root directory (main branch)
+- **Distribution files**: `dist/` directory (generated) or dist-branch
+- **Build instructions**: See [BUILD.md](BUILD.md)
+
 ## What It Does
 
 Spec Manager automates and standardizes specification creation:
