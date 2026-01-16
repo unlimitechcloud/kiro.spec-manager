@@ -2,7 +2,18 @@
 name: "spec-manager"
 displayName: "Spec Manager"
 description: "Standardize spec creation with intelligent identifier auto-increment, URL pattern detection, GitHub Issues and Jira integration, and git-based assignee tracking for consistent project management across teams"
-keywords: ["specs", "project-management", "organization", "workflow", "traceability", "naming-conventions", "auto-increment", "github", "jira", "tracking-systems"]
+keywords: 
+  - "specs"
+  - "project-management"
+  - "organization"
+  - "workflow"
+  - "traceability"
+  - "naming-conventions"
+  - "auto-increment"
+  - "github"
+  - "jira"
+  - "tracking-systems"
+  - "prefix-aware-input"
 author: "Kiro Community"
 ---
 
@@ -15,6 +26,7 @@ A Knowledge Base Power that standardizes spec creation in Kiro with intelligent 
 The Spec Manager Power provides comprehensive workflows and documentation for creating specs with:
 
 - **Intelligent Identifier Auto-increment**: Automatically suggests the next identifier based on your project's pattern (with or without zero-padding)
+- **Prefix-Aware Input**: Type just numbers (e.g., `7`) instead of full identifiers (e.g., `GITHUB-7`) for faster spec creation
 - **URL Pattern Detection**: Reconstructs external system URLs from previous specs
 - **GitHub Issues Integration**: Synthetic identifiers (GITHUB-{number}) with automatic URL reconstruction
 - **Jira Integration**: Direct use of Jira keys as identifiers with Cloud and Server support
