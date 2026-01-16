@@ -2,7 +2,7 @@
 name: "spec-manager"
 displayName: "Spec Manager"
 description: "Standardize spec creation with intelligent auto-increment, URL detection, GitHub/Jira integration, and git-based tracking"
-keywords: ["specs", "project-management", "organization", "workflow", "traceability", "naming-conventions", "auto-increment", "github", "jira", "tracking-systems", "prefix-aware-input"]
+keywords: ["specs", "documentation", "organization", "github", "jira"]
 author: "Unlimitech Cloud LLC"
 ---
 
