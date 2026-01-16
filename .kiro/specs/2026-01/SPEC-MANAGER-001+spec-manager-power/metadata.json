@@ -1,0 +1,12 @@
+{
+  "specIdentifier": "SPEC-MANAGER-001",
+  "specName": "spec-manager-power",
+  "displayName": "Spec Manager Power",
+  "created": "2026-01-16",
+  "updated": "2026-01-16",
+  "status": "in-progress",
+  "url": null,
+  "assignee": "Manuel Lara",
+  "tags": ["power", "knowledge-base", "spec-management", "documentation", "metadata", "git-integration", "auto-increment", "padding-detection"],
+  "notes": "Knowledge Base Power for standardizing spec creation with identifier-based naming, date organization, and external system traceability. Features auto-detection of assignee from git config, URL pattern detection, identifier auto-increment with padding preservation, and metadata query capabilities. This power will be published publicly for the Kiro community."
+}

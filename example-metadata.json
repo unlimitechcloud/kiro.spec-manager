@@ -1,0 +1,16 @@
+{
+  "specIdentifier": "PROJECT-1",
+  "specName": "user-authentication",
+  "displayName": "User Authentication",
+  "created": "2026-01-16",
+  "updated": "2026-01-16",
+  "status": "in-progress",
+  "url": "https://jira.example.com/PROJECT-1",
+  "assignee": "John Doe",
+  "tags": [
+    "auth",
+    "security",
+    "frontend"
+  ],
+  "notes": "Implement user authentication with OAuth 2.0 and JWT tokens"
+}
