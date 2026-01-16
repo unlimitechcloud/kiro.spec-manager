@@ -1,0 +1,18 @@
+# Build output
+dist/
+
+# Node modules
+node_modules/
+
+# Spec working directories
+.kiro/specs/**/.work/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
